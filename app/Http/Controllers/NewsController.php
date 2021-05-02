@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\News as NewsResource;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::all();
+        return $news = News::all();
         return view('index', compact('news'));
     }
 
@@ -37,7 +38,6 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         News::create($request->only(['title', 'date', 'content']));
-        return view('forma');
     }
 
     /**
@@ -48,7 +48,7 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return view('show', compact('news'));
+        return view('index', compact('news'));
     }
 
     /**
@@ -59,7 +59,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        return view('form', compact('news'));
+        //return view('forma', compact('news'));
     }
 
     /**
@@ -72,7 +72,7 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         $news->edit($request->only(['title', 'date', 'content']));
-        return view('form');
+        return view('forma');
     }
 
     /**
